@@ -15,26 +15,29 @@ int main()
 	char word[20],*w;
 	printf("=====FINDING WORD=====\n");
 	printf("How many sentense that you want huh? : ");
-
 	scanf_s("%d", &n);
 
-	printf("what word do you want to find? : ");
-	scanf("%s",word);
-	w = word;
-	if (n == 0) { printf("NO sentense needed to find"); }
+	if (n == 0) 
+	{	
+		printf("===== consequence =====\n");
+		printf("NO sentence needed to find"); 
+	}
 	else {
+		printf("what word do you want to find? : ");
+		scanf("%s", word);
+		w = word;
 		for (int i = 0;i < n;i++)
 		{
 			printf("Enter Text[%d] : ", i);
-			scanf("%s", str_input[i].text);
+			scanf(" %[^\n]", str_input[i].text);
 			str_input[i].p = str_input[i].text;
-
+			printf("%s", str_input[i].text);
 		}
-		//printf("the consequence : \n");
+		printf("===== consequence =====\n");
 		for (int i = 0;i < n;i++)
 		{
-			printf("=====The consequence=====");
-			finding(str_input[i].p,word);
+			printf("text[%d] : ",i);
+			finding(str_input[i].p,w);
 			printf("\n");
 		}
 	}
@@ -43,27 +46,50 @@ int main()
 }
 void finding(char* x,char* w)
 {
-	int found=0;
+	int found = 0;
 	int i = 0,j = 0;
-	for (x;*x != '\0';x++)
+	char* tempw,*tempx;
+	tempw = w;
+	
+	for (x;*x != '\0'&&(found == false);x++)
 	{
+		tempx = x;
 		found = true;
-		i = 0;
 		for(w;*w != '\0';w++)
 		{
-			j = 0;
-			if (*(x + j) != *w) 
+			
+			if (*x != *w) 
 			{
 				found = false;
 				break;
 			}
-			j++;
+			else
+			x++;
 		}
-		if (found == true)
-		{
-			printf("\"%s\" found at character: %d",*w,i+1);
-		}
+		x = tempx;
+		w = tempw;
 		i++;
-	}
 
+	}
+	
+	if (found == true)
+	{
+		printf("\'");
+		for (w;*w != '\0';w++)
+		{
+			printf("%c", *w);
+		}
+		printf("\'");
+		printf(" found at character: %d", i );
+	}
+	if (found == false)
+	{
+		printf("\'");
+		for (w;*w != '\0';w++)
+		{
+			printf("%c", *w);
+		}
+		printf("\'");
+		printf(" didn't find in this sentence");
+	}
 }
