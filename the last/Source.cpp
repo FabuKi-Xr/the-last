@@ -31,7 +31,6 @@ int main()
 			printf("Enter Text[%d] : ", i);
 			scanf(" %[^\n]", str_input[i].text);
 			str_input[i].p = str_input[i].text;
-			printf("%s", str_input[i].text);
 		}
 		printf("===== consequence =====\n");
 		for (int i = 0;i < n;i++)
